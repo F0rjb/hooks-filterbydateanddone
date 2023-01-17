@@ -1,4 +1,4 @@
-const NavBar = ({ filterDone }) => {
+const NavBar = ({ filterDone, getfilterDate }) => {
   return (
     <div>
       <select onChange={(e) => filterDone(e.target.value)} name="" id="">
@@ -9,6 +9,12 @@ const NavBar = ({ filterDone }) => {
       <div>
         <input type="text" />
         <button>Search</button>
+        <input
+          type="date"
+          name=""
+          id=""
+          onChange={(e) => getfilterDate(e.target.value)}
+        />
       </div>
     </div>
   );
