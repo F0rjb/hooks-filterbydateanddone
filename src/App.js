@@ -35,7 +35,28 @@ function App() {
   const getfilterDate = (Date) => {
     setfilterDate(Date);
   };
-  console.log(filterDate);
+
+  const filteredData = list.filter((item) => {
+    if (filterDate !== "" && filterdone !== "all") {
+      if (filterdone === "done") {
+        return item.date > filterDate && item.isDone === true;
+      }
+      if (filterdone === "notdone") {
+        return item.date > filterDate && item.isDone === false;
+      }
+    } else if (filterDate !== "") {
+      return item.date > filterDate;
+    } else if (filterdone !== "all") {
+      if (filterdone === "done") {
+        return item.isDone === true;
+      }
+      if (filterdone === "notdone") {
+        return item.isDone === false;
+      }
+    } else {
+      return data;
+    }
+  });
 
   return (
     <div className="App">
@@ -43,13 +64,7 @@ function App() {
       <AddTodo handleAdd={handleAdd} />
       <TodoList
         // list={if (filterdone=="All" && filterdate)
-        list={
-          filterdone === "done"
-            ? list.filter((el) => el.isDone)
-            : filterdone === "notdone"
-            ? list.filter((el) => !el.isDone)
-            : list
-        }
+        list={filteredData}
         handleDone={handleDone}
         handleEdit={handleEdit}
       />
